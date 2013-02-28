@@ -1,0 +1,44 @@
+diff --git a/system/keymaps/mouse.xml b/system/keymaps/mouse.xml
+index 7a49305..11b8a2b 100644
+--- a/system/keymaps/mouse.xml
++++ b/system/keymaps/mouse.xml
+@@ -19,4 +19,39 @@
+       <wheeldown>NextPicture</wheeldown>
+     </mouse>
+   </SlideShow>
++  <FullscreenVideo>
++    <mouse>
++      <wheelup>VolumeUp</wheelup>
++      <wheeldown>VolumeDown</wheeldown>
++      <doubleclick>ToggleFullScreen</doubleclick>
++    </mouse>
++  </FullscreenVideo>
++  <VideoOSD>
++    <mouse>
++      <wheelup>VolumeUp</wheelup>
++      <wheeldown>VolumeDown</wheeldown>
++      <doubleclick>ToggleFullScreen</doubleclick>
++    </mouse>
++  </VideoOSD>
++  <FullscreenMusic>
++    <mouse>
++      <wheelup>VolumeUp</wheelup>
++      <wheeldown>VolumeDown</wheeldown>
++      <doubleclick>ToggleFullScreen</doubleclick>
++    </mouse>
++  </FullscreenMusic>
++  <MusicOSD>
++    <mouse>
++      <wheelup>VolumeUp</wheelup>
++      <wheeldown>VolumeDown</wheeldown>
++      <doubleclick>ToggleFullScreen</doubleclick>
++    </mouse>
++  </MusicOSD>
++  <Home>
++    <mouse>
++      <wheelup>VolumeUp</wheelup>
++      <wheeldown>VolumeDown</wheeldown>
++      <doubleclick>ToggleFullScreen</doubleclick>
++    </mouse>
++  </Home>
+ </keymap>
