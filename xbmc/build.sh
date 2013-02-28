@@ -3,8 +3,9 @@ set -e
 
 PKG_NAME='xbmc'
 PKG_EPOCH='2'
-PPA='xbmc'
+PPA='xbmc-release'
 SRC_URL='https://github.com/xbmc/xbmc.git'
+REV='origin/Frodo'
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
