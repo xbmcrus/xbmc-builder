@@ -1,0 +1,15 @@
+#! /usr/bin/make -f
+
+NPROC := $(shell getconf _NPROCESSORS_ONLN)
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --prefix=/usr/lib/xbmc
+
+override_dh_auto_build:
+	dh_auto_build -- -j$(NPROC) all
+
+override_dh_shlibdeps:
+	dpkg-shlibdeps -Tdebian/xbmc-addon-xvdr.substvars $(CURDIR)/debian/xbmc-addon-xvdr/usr/lib/xbmc/addons/pvr.vdr.xvdr/XBMC_VDR_xvdr.pvr
