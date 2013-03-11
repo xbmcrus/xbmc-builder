@@ -21,15 +21,17 @@ version() {
 }
 
 _checkout() {
-     local src="$1"
-    _git_checkout "$src"
-    cd "$src"
+     local dest="$1"
+     local deb_dir="$BUILD_DIR/debian"
+     
+    _git_checkout "$dest"
+    cd "$dest"
     ./autogen.sh
+    cp -r debian "$deb_dir"
 }
 
 _deb_dir() {
     local deb_dir="$BUILD_DIR/debian"
-    cp -r "$SRC_DIR/debian" "$deb_dir"
     cp -r "$DIR/debian"/* "$deb_dir"
     echo "$deb_dir"
 }
