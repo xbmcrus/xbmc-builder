@@ -23,8 +23,6 @@ version() {
 _checkout() {
      local src="$1"
     _git_checkout "$src"
-    cd "$src"
-    ./bootstrap
 }
 
 _main $@
