@@ -2,7 +2,7 @@
 set -e
 
 PKG_NAME='xbmc-addon-xvdr'
-PPA='xbmc-addons'
+PPA='xbmc'
 SRC_URL='https://github.com/pipelka/xbmc-addon-xvdr.git'
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
