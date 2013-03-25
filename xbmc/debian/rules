@@ -107,7 +107,6 @@ override_dh_auto_build:
 	dh_auto_build -- -j$(NPROC)
 
 override_dh_auto_install:
-	$(MAKE) -C lib/addons/script.module.pil
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
 	$(MAKE) eventclients DESTDIR=$(CURDIR)/debian/tmp \
 		WII_EXTRA_OPTS=-DCWIID_OLD
