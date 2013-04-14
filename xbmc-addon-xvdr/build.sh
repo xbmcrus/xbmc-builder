@@ -9,7 +9,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
 
 version() {
-    local delta='7'
+    local delta='14'
     local bs_ci_count=$(git --git-dir="$DIR/../.git" log --format='%H' -- "$PKG_NAME" | wc -l)
     local sha=$(git --git-dir="$SRC_DIR/.git" log --format='%h' -n1 $REV)
     local ci_count=$(git --git-dir="$SRC_DIR/.git" log --format='%H' $REV | wc -l)
