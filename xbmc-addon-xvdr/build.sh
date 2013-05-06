@@ -28,6 +28,7 @@ _checkout() {
     cd "$dest"
     ./autogen.sh
     cp -r debian "$deb_dir"
+    sed -i "s/^Depends:/Depends: xbmc, /" "$deb_dir/control"
 }
 
 _deb_dir() {
