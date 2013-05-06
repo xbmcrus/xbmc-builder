@@ -69,7 +69,6 @@ XBMC_CONFIG_OPTIONS := \
   --disable-vdadecoder \
   --disable-vtbdecoder \
   --enable-afpclient \
-  --enable-airtunes \
   --enable-avahi \
   --enable-crystalhd \
   --enable-ffmpeg-libvorbis \
