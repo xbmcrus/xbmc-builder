@@ -1,8 +1,8 @@
 diff --git a/xbmc/dialogs/GUIDialogKeyboardGeneric.cpp b/xbmc/dialogs/GUIDialogKeyboardGeneric.cpp
-index 73f5369..a38bc06 100644
+index 0ddb263..fb770ae 100644
 --- a/xbmc/dialogs/GUIDialogKeyboardGeneric.cpp
 +++ b/xbmc/dialogs/GUIDialogKeyboardGeneric.cpp
-@@ -45,6 +45,8 @@ static char symbol_map[37] = ")!@#$%^&*([]{}-_=+;:\'\",.<>/?\\|`~    ";
+@@ -46,6 +46,8 @@ static char symbol_map[37] = ")!@#$%^&*([]{}-_=+;:\'\",.<>/?\\|`~    ";
  #define CTL_BUTTON_LEFT       305
  #define CTL_BUTTON_RIGHT      306
  #define CTL_BUTTON_IP_ADDRESS 307
@@ -11,15 +11,15 @@ index 73f5369..a38bc06 100644
  #define CTL_BUTTON_CLEAR      308
  
  #define CTL_LABEL_EDIT        310
-@@ -67,6 +69,7 @@ CGUIDialogKeyboardGeneric::CGUIDialogKeyboardGeneric()
+@@ -68,6 +70,7 @@ CGUIDialogKeyboardGeneric::CGUIDialogKeyboardGeneric()
    m_bShift = false;
    m_hiddenInput = false;
    m_keyType = LOWER;
 +	m_keyLayout = ENG;
    m_strHeading = "";
-   m_lastRemoteClickTime = 0;
-   m_loadType = KEEP_IN_MEMORY;
-@@ -244,6 +247,11 @@ bool CGUIDialogKeyboardGeneric::OnMessage(CGUIMessage& message)
+   m_iCursorPos = 0;
+   m_iEditingOffset = 0;
+@@ -252,6 +255,11 @@ bool CGUIDialogKeyboardGeneric::OnMessage(CGUIMessage& message)
        case CTL_BUTTON_SHIFT:
          OnShift();
          break;
@@ -31,7 +31,7 @@ index 73f5369..a38bc06 100644
        case CTL_BUTTON_CAPS:
          if (m_keyType == LOWER)
            m_keyType = CAPS;
-@@ -417,7 +425,7 @@ void CGUIDialogKeyboardGeneric::OnRemoteNumberClick(int key)
+@@ -476,7 +484,7 @@ void CGUIDialogKeyboardGeneric::OnRemoteNumberClick(int key)
    Character(ch);
  }
  
@@ -40,7 +40,7 @@ index 73f5369..a38bc06 100644
  {
    // First the numbers
    if (iButton >= 48 && iButton <= 57)
-@@ -432,24 +440,49 @@ char CGUIDialogKeyboardGeneric::GetCharacter(int iButton)
+@@ -491,24 +499,49 @@ char CGUIDialogKeyboardGeneric::GetCharacter(int iButton)
    }
    else if (iButton == 32) // space
      return (char)iButton;
@@ -107,7 +107,7 @@ index 73f5369..a38bc06 100644
    { // check for symbols
      for (unsigned int i = 0; i < NUM_SYMBOLS; i++)
        if (iButton == symbolButtons[i])
-@@ -505,6 +538,12 @@ void CGUIDialogKeyboardGeneric::UpdateButtons()
+@@ -564,6 +597,12 @@ void CGUIDialogKeyboardGeneric::UpdateButtons()
      SetControlLabel(iButton, aLabel);
    }
  
@@ -120,7 +120,7 @@ index 73f5369..a38bc06 100644
    // set correct alphabet characters...
  
    for (int iButton = 65; iButton <= 90; iButton++)
-@@ -569,9 +608,13 @@ int CGUIDialogKeyboardGeneric::GetCursorPos() const
+@@ -631,9 +670,13 @@ int CGUIDialogKeyboardGeneric::GetCursorPos() const
  void CGUIDialogKeyboardGeneric::OnSymbols()
  {
    if (m_keyType == SYMBOLS)
@@ -134,7 +134,7 @@ index 73f5369..a38bc06 100644
    UpdateButtons();
  }
  
-@@ -619,10 +662,151 @@ void CGUIDialogKeyboardGeneric::ResetShiftAndSymbols()
+@@ -681,10 +724,151 @@ void CGUIDialogKeyboardGeneric::ResetShiftAndSymbols()
  
  const char* CGUIDialogKeyboardGeneric::s_charsSeries[10] = { " 0!@#$%^&*()[]{}<>/\\|", ".,1;:\'\"-+_=?`~", "ABC2", "DEF3", "GHI4", "JKL5", "MNO6", "PQRS7", "TUV8", "WXYZ9" };
  
@@ -288,7 +288,7 @@ index 73f5369..a38bc06 100644
    {
      if (m_children[i]->GetID() == id || m_children[i]->IsGroup())
 diff --git a/xbmc/dialogs/GUIDialogKeyboardGeneric.h b/xbmc/dialogs/GUIDialogKeyboardGeneric.h
-index 1e57e5f..21b8751 100644
+index 74911e5..dd49fc2 100644
 --- a/xbmc/dialogs/GUIDialogKeyboardGeneric.h
 +++ b/xbmc/dialogs/GUIDialogKeyboardGeneric.h
 @@ -26,6 +26,8 @@
@@ -300,16 +300,16 @@ index 1e57e5f..21b8751 100644
  class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
  {
    public:
-@@ -41,6 +43,8 @@ class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
-     void SetHeading(const std::string& heading);
-     void SetText(const CStdString& aTextString);
+@@ -43,6 +45,8 @@ class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
+     void InputText(const CStdString& aTextString);
+     void InputTextEditing(const CStdString& aTextString, int start, int length);
      CStdString GetText() const;
 +    CStdString GetRusLabelById(int id, bool capital);
 +    char GetAddButtonById(int id);
      bool IsConfirmed() { return m_bIsConfirmed; };
      void SetHiddenInput(bool hiddenInput) { m_hiddenInput = hiddenInput; };
      void Character(WCHAR wch);
-@@ -63,7 +67,7 @@ class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
+@@ -65,7 +69,7 @@ class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
      void OnClickButton(int iButtonControl);
      void OnRemoteNumberClick(int key);
      void UpdateButtons();
@@ -318,8 +318,8 @@ index 1e57e5f..21b8751 100644
      void UpdateLabel();
      void ResetShiftAndSymbols();
      void Backspace();
-@@ -72,6 +76,7 @@ class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
-     CStdStringW m_strEdit;
+@@ -81,6 +85,7 @@ class CGUIDialogKeyboardGeneric : public CGUIDialog, public CGUIKeyboard
+ 
      bool m_bIsConfirmed;
      KEYBOARD m_keyType;
 +    KEYBOARD_LAYOUT m_keyLayout;

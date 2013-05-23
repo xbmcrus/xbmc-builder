@@ -405,10 +405,10 @@ index 07d87be..85da939 100644
 \ No newline at end of file
 +</window>
 diff --git a/addons/skin.confluence/language/English/strings.po b/addons/skin.confluence/language/English/strings.po
-index d602451..fa8f80c 100644
+index 445e44a..611a95b 100644
 --- a/addons/skin.confluence/language/English/strings.po
 +++ b/addons/skin.confluence/language/English/strings.po
-@@ -667,3 +667,11 @@ msgstr ""
+@@ -669,3 +669,11 @@ msgstr ""
  msgctxt "#31959"
  msgid "SYSTEM"
  msgstr ""
