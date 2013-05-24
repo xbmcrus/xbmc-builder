@@ -61,7 +61,6 @@ XBMC_CONFIG_OPTIONS := \
   $(OPENMAX_OPTIONS) \
   $(XBMC_CONFIG_EXTRA_OPTIONS) \
   --disable-asap-codec \
-  --disable-ccache \
   --disable-mid \
   --disable-profiling \
   --disable-pulse \
@@ -82,6 +81,7 @@ XBMC_CONFIG_OPTIONS := \
   --enable-texturepacker \
   --enable-vaapi \
   --enable-vdpau \
+  --enable-xvba \
   --enable-webserver \
   --enable-xrandr \
 

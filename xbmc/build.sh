@@ -3,10 +3,21 @@ set -e
 
 : ${PKG_NAME:='xbmc'}
 : ${PKG_EPOCH:='2'}
-: ${SRC_URL:='https://github.com/xbmc/xbmc.git'}
+: ${REV:='FernetMenta/master'}
+: ${SRC_URL:='https://github.com/FernetMenta/xbmc.git'}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
+
+PPA_DEPENDS="$PPA_DEPENDS
+deb http://ppa.launchpad.net/wsnipex/xvba-dev/ubuntu #DISTRIB# main
+deb-src $PPA_URL/$PPA/ubuntu #DISTRIB# main
+deb http://ppa.launchpad.net/wsnipex/xvba-dev/ubuntu #DISTRIB# main
+deb-src http://ppa.launchpad.net/wsnipex/xvba-dev/ubuntu #DISTRIB# main
+deb http://ppa.launchpad.net/aap/xbmc/ubuntu #DISTRIB# main
+deb-src http://ppa.launchpad.net/aap/xbmc/ubuntu #DISTRIB# main
+deb http://ppa.launchpad.net/aap/intel-drivers/ubuntu #DISTRIB# main
+deb-src http://ppa.launchpad.net/aap/intel-drivers/ubuntu #DISTRIB# main"
 
 version() {
     local delta='22'

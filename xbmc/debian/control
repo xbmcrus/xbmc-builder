@@ -97,6 +97,7 @@ Build-Depends: debhelper (>= 7.0.50~),
  libavutil-dev,
  libpostproc-dev,
  libswscale-dev,
+ libxvba-dev,
 Standards-Version: 3.9.3
 Homepage: http://xbmc.org/
 Vcs-Git: git://github.com/xbmc/xbmc-packaging.git
