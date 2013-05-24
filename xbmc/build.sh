@@ -1,17 +1,16 @@
 #!/bin/sh
 set -e
 
-PKG_NAME='xbmc'
-PKG_EPOCH='2'
-PPA='xbmc-release'
-SRC_URL='https://github.com/xbmc/xbmc.git'
-REV='origin/Frodo'
+: ${PKG_NAME:='xbmc'}
+: ${PKG_EPOCH:='2'}
+: ${SRC_URL:='https://github.com/xbmc/xbmc.git'}
+: ${REV:='origin/Frodo'}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
 
 version() {
-    local delta='22'
+    local delta='21'
     local bs_ci_count=$(git --git-dir="$DIR/../.git" log --format='%H' -- "$PKG_NAME" | wc -l)
     local sha=$(git --git-dir="$SRC_DIR/.git" log --format='%h' -n1 $REV)
     local ci_count=$(git --git-dir="$SRC_DIR/.git" log --format='%H' $REV | wc -l)
