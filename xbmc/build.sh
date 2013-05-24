@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
 
-PKG_NAME='xbmc'
-PKG_EPOCH='2'
-PPA='xbmc'
-SRC_URL='https://github.com/xbmc/xbmc.git'
+: ${PKG_NAME:='xbmc'}
+: ${PKG_EPOCH:='2'}
+: ${PPA:='xbmc'}
+: ${SRC_URL:='https://github.com/xbmc/xbmc.git'}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
