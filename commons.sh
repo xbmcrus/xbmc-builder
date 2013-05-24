@@ -1,5 +1,6 @@
 #!/bin/sh
 
+: ${PPA:='xbmc'}
 : ${PPA_URL:='http://ppa.launchpad.net/aap'}
 : ${DIR:="$(cd "$(dirname "$0")" && pwd)"}
 DEPENDS="$DEPENDS git"

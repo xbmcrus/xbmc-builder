@@ -1,9 +1,8 @@
 #!/bin/sh
 set -e
 
-PKG_NAME='xbmc-addon-xvdr'
-PPA='xbmc'
-SRC_URL='https://github.com/pipelka/xbmc-addon-xvdr.git'
+: ${PKG_NAME:='xbmc-addon-xvdr'}
+: ${SRC_URL:='https://github.com/pipelka/xbmc-addon-xvdr.git'}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
