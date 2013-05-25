@@ -1,5 +1,5 @@
 diff --git a/addons/skin.confluence/720p/DialogKeyboard.xml b/addons/skin.confluence/720p/DialogKeyboard.xml
-index 07d87be..85da939 100644
+index a5e27a1..7dcca62 100644
 --- a/addons/skin.confluence/720p/DialogKeyboard.xml
 +++ b/addons/skin.confluence/720p/DialogKeyboard.xml
 @@ -92,7 +92,7 @@
@@ -404,19 +404,3 @@ index 07d87be..85da939 100644
 -</window>
 \ No newline at end of file
 +</window>
-diff --git a/addons/skin.confluence/language/English/strings.po b/addons/skin.confluence/language/English/strings.po
-index 445e44a..611a95b 100644
---- a/addons/skin.confluence/language/English/strings.po
-+++ b/addons/skin.confluence/language/English/strings.po
-@@ -669,3 +669,11 @@ msgstr ""
- msgctxt "#31959"
- msgid "SYSTEM"
- msgstr ""
-+
-+msgctxt "#909001"
-+msgid "Rus"
-+msgstr ""
-+
-+msgctxt "#909002"
-+msgid "IP"
-+msgstr ""

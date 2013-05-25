@@ -1,6 +1,6 @@
 #!/bin/sh
 
-: ${PPA:='xbmc-fernetmenta'}
+: ${PPA:='xbmc-release-fernetmenta'}
 : ${PPA_URL:='http://ppa.launchpad.net/aap'}
 : ${DIR:="$(cd "$(dirname "$0")" && pwd)"}
 DEPENDS="$DEPENDS git"

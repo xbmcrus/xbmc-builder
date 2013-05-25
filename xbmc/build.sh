@@ -3,7 +3,7 @@ set -e
 
 : ${PKG_NAME:='xbmc'}
 : ${PKG_EPOCH:='2'}
-: ${REV:='FernetMenta/master'}
+: ${REV:='FernetMenta/frodo'}
 : ${SRC_URL:='https://github.com/FernetMenta/xbmc.git'}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
