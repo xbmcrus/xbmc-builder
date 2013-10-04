@@ -9,7 +9,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
 
 version() {
-    local delta='6'
+    local delta='7'
     local bs_ci_count=$(git --git-dir="$DIR/../.git" log --format='%H' -- "$PKG_NAME" | wc -l)
     local sha=$(git --git-dir="$SRC_DIR/.git" log --format='%h' -n1 $REV)
     local ci_count=$(git --git-dir="$SRC_DIR/.git" log --format='%H' $REV | wc -l)
@@ -22,17 +22,26 @@ version() {
 
 _checkout() {
      local dest="$1"
-     local deb_dir="$BUILD_DIR/debian"
-     
     _git_checkout "$dest"
-    cd "$dest"
-    ./autogen.sh
-    cp -r debian "$deb_dir"
 }
 
 _deb_dir() {
     local deb_dir="$BUILD_DIR/debian"
-    cp -r "$DIR/debian"/* "$deb_dir"
+    
+    if [ ! -d "$deb_dir" ]
+    then
+        local src="$1"
+        local tmp_src="$BUILD_DIR/tmp_src"
+        cp -r "$src" "$tmp_src"
+        cd "$tmp_src"
+        ./autogen.sh > /dev/null
+        cp -r debian "$deb_dir"
+        cd - > /dev/null
+        $RM -rf "$tmp_src"
+        sed -i "s/^Depends:/Depends: xbmc,/; s/Build-Depends:/Build-Depends: libtool,/" "$deb_dir/control"
+        cp -r "$DIR/debian"/* "$deb_dir"
+    fi
+    
     echo "$deb_dir"
 }
 
