@@ -1,0 +1,78 @@
+#!/bin/sh
+set -e
+
+NAME='XBMC'
+EXECUTABLE='/usr/lib/xbmc/xbmc.bin'
+PID_FILE="$HOME/.xbmc/xbmc.pid"
+INITCTL='/sbin/initctl'
+
+. /lib/lsb/init-functions
+
+start_vdr() {
+    if $INITCTL status vdr | grep -q 'start/'
+    then
+        return 0
+    fi
+    
+    if sudo $INITCTL start vdr
+    then
+        trap 'sudo $INITCTL stop vdr > /dev/null 2>&1' EXIT HUP INT QUIT TERM
+    else
+        echo 'Failed to start VDR' 2>&1
+        return 1
+    fi
+    
+    for i in $(seq 1 20)
+    do
+        if nc -zw1 localhost 34891
+        then
+            return 0
+        fi
+        
+        sleep 1
+    done
+    
+    echo 'The XVDR plugin seems not to be running' 2>&1
+    return 1
+}
+
+status() {
+    status_of_proc -p "$PID_FILE" "$EXECUTABLE" "$NAME"
+}
+
+start() {
+    if status > /dev/null
+    then
+        status
+        return 0
+    fi
+    
+    local pid_dir="$(dirname "$PID_FILE")"
+    [ -d "$pid_dir" ] || mkdir -p "$pid_dir"
+    start_vdr || true
+    start-stop-daemon -S -q -o -m -n "$NAME" -p "$PID_FILE" -x "$EXECUTABLE" -- $@
+}
+
+stop() {
+    start-stop-daemon -K -q -p "$PID_FILE" --retry 5 && rm -f "$PID_FILE"
+}
+
+case "$1" in
+  start)
+    shift
+    start $@
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    shift
+    stop || true
+    start $@
+    ;;
+  status)
+    status
+  ;;
+  *)
+    start $@
+esac
