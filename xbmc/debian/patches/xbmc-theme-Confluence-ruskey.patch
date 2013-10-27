@@ -408,11 +408,10 @@ diff --git a/addons/skin.confluence/language/English/strings.po b/addons/skin.co
 index 0ec2716..80ffaaf 100644
 --- a/addons/skin.confluence/language/English/strings.po
 +++ b/addons/skin.confluence/language/English/strings.po
-@@ -679,3 +679,11 @@ msgstr ""
- msgctxt "#31959"
- msgid "SYSTEM"
- msgstr ""
-+
+@@ -16,6 +16,14 @@
+ "Language: en\n"
+ "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+ 
 +msgctxt "#909001"
 +msgid "Rus"
 +msgstr ""
@@ -420,3 +419,26 @@ index 0ec2716..80ffaaf 100644
 +msgctxt "#909002"
 +msgid "IP"
 +msgstr ""
++
+ #Misc labels
+ 
+ msgctxt "#31000"
+diff --git a/addons/skin.confluence/language/Russian/strings.po b/addons/skin.confluence/language/Russian/strings.po
+index 52d2947..a91509d 100644
+--- a/addons/skin.confluence/language/Russian/strings.po	
++++ b/addons/skin.confluence/language/Russian/strings.po
+@@ -16,6 +16,14 @@
+ "Language: ru\n"
+ "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+ 
++msgctxt "#909001"
++msgid "Rus"
++msgstr "Pyc"
++
++msgctxt "#909002"
++msgid "IP"
++msgstr ""
++
+ msgctxt "#31000"
+ msgid "Change Your"
+ msgstr "Измените"
