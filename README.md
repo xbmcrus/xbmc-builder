@@ -7,25 +7,23 @@ forked from AndreyPavlenko/xbmc-builder
 
  Создаем директории:
 
- mkdir $HOME/ppa
- 
- mkdir $HOME/ppa/sources
- 
- клонируем git, нужный для сборки пакетов:
- 
- cd $HOME/ppa/sources/
- 
- выполняем для клонирования XBMC ветки frodo из github bigbelec :
- 
- git clone -b frodo https://github.com/bigbelec/xbmc.git
+1. mkdir $HOME/ppa
 
-  Клонируем скрипты для сборки deb пакетов XBMC:
+2. mkdir $HOME/ppa/sources
 
-  mkdir -p $HOME/ppa/builders/xbmc-builder
- 
- git clone https://github.com/bigbelec/xbmc-builder.git $HOME/ppa/builders/xbmc-builder
+3. cd $HOME/ppa/sources
 
-Cоздаём в домашней директории конфигурационный файл :
+4. git clone https://github.com/xbmc/xbmc.git
+
+5. exit
+
+  Клонируем билд скрипты:
+
+6. mkdir -p $HOME/ppa/builders/xbmc-builder
+
+7. git clone https://github.com/AndreyPavlenko/xbmc-builder.git $HOME/ppa/builders/xbmc-builder
+
+8. Cоздаём в домашней директории конфигурационный файл :
 
 sudo nano  ~/.build.config
 
@@ -80,20 +78,32 @@ incoming = ~bigbax/frodo/ubuntu/
 login = anonymous 
 
 allow_unsigned_uploads = 0
+  
+9. Входим в директорию с .git
 
-Делаем предподготовку в своём github:
+cd $HOME/ppa/builders/xbmc-builder/xbmc
+
+10. Собираем:
+
+TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
+
+11. Отправляем в РРА 6
+
+PPA=рра_указанный_в_build.config ./build.sh upload
+
+12. ## Если имеется, то делаем предподготовку в своём github:
 
 git clone https://github.com/bigbelec/xbmc.git
 
-cd xbmc
+13. cd xbmc
 
-git init
+14. git init
 
-Переключаемся на нужную ветку гита :
+15. Переключаемся на нужную ветку гита :
 
 git checkout frodo
 
-На запрос :
+16. На запрос :
 
 *** Please tell me who you are.
 
@@ -103,17 +113,17 @@ git config --global user.email "логин в github"
 
 git config --global user.name "password" пароль пользователя в самой системе убунту
 
-делаем изменения(патчи) в локальном гите
+17. делаем изменения(патчи) в локальном гите
 
-индексируем:
+18. индексируем:
 
 git add .
 
-делаем коммит:
+19. делаем коммит:
 
 git commit -a -m 'pvr: fix channel switch for addons using other stream'
 
-отправляем измнения в гит в инете:
+20. отправляем измнения в гит в инете:
 
 git push -u https://github.com/bigbelec/xbmc.git
 
@@ -121,7 +131,9 @@ Username for 'https://github.com': bigbelec2014@yandex.ru
 
 Password for 'https://bigbelec2014@yandex.ru@github.com':  пароль в github
 
-cd /home/login/ppa/sources
+21. Работа с своим github :
+
+cd ~/ppa/sources
 
 git clone -b frodo https://github.com/bigbelec/xbmc.git
 
@@ -133,11 +145,11 @@ git status
 
 exit
 
-У себя в github также делаем по дефолту frodo
+21. У себя в github также делаем по дефолту например ветвь frodo
 
-Меняем в конфигурации ветку для сборки:
+22. Меняем в конфигурации ветку для сборки:
 
-sudo nano /home/login/ppa/builders/xbmc-builder/xbmc/build.sh 
+sudo nano ~/ppa/builders/xbmc-builder/xbmc/build.sh 
 
 : ${PKG_NAME:='xbmc'}
 
@@ -147,39 +159,49 @@ sudo nano /home/login/ppa/builders/xbmc-builder/xbmc/build.sh
 
 : ${REV:='origin/frodo'}
 
-И наконец создаем source.changes для отправки в РРА :
+23. И наконец создаем source.changes для отправки в РРА :
 
-cd /home/login/ppa/builders/xbmc-builder/xbmc
+cd ~/ppa/builders/xbmc-builder/xbmc
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
 
-cd /home/login/ppa/builders/xbmc-builder/xbmc/distribs/26.10.13/src
+24. Входим в каталог с сырцами: 
+
+cd ~/ppa/builders/xbmc-builder/xbmc/distribs/26.10.13/src
+
+25. И если нужно , то отправляем в РРА вручную :
 
 dput ppa:bigbax/frodo xbmc_12.2-20398~cf3a9a5-ppa1~precise_source.changes
 
-Создаем патч.
+26. Создаем патч.
 
-  git diff > ~/ppa/builders/xbmc-builder/xbmc/debian/patches/strings.patch
+git diff > ~/ppa/builders/xbmc-builder/xbmc/debian/patches/strings.patch
 
-Прописываем этот патч в debian/patches/series
+27. Прописываем этот патч в debian/patches/series
 
-Делаем и отправляем в РРА аддоны :
+sudo nano ~/ppa/builders/xbmc-builder/xbmc/debian/patches/series
 
-cd /home/login/ppa/sources
+впишем strings.patch
+
+28. Делаем и отправляем в РРА аддоны :
+
+cd ~/ppa/sources
 
 git clone https://github.com/pipelka/xbmc-addon-xvdr.git
 
 exit
 
-cd /home/login/ppa/builders/xbmc-builder/xbmc-addon-xvdr
+29. Собираем : 
+
+cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
 exit
 
-cd /home/login/ppa/builders/xbmc-builder/xbmc-addon-xvdr/distribs/26.10.13/src
+cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr/distribs/26.10.13/src
 
-отправляем в своё РРА :
+30: отправляем в своё РРА :
 
 dput ppa:bigbax/frodo xbmc-addon-xvdr_0.9.8-361~acd4e14-ppa1~precise_source.changes
