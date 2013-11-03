@@ -5,7 +5,7 @@ Build scripts for XBMC and related packages.
 
 forked from AndreyPavlenko/xbmc-builder
 
-#  Создаем директории
+1. Создаем директории
 
 mkdir $HOME/ppa
 
@@ -17,13 +17,13 @@ git clone https://github.com/xbmc/xbmc.git
 
 exit
 
-#  Клонируем билд скрипты
+2. Клонируем билд скрипты
 
 mkdir -p $HOME/ppa/builders/xbmc-builder
 
 git clone https://github.com/AndreyPavlenko/xbmc-builder.git $HOME/ppa/builders/xbmc-builder
 
-# Cоздаём в домашней директории конфигурационный файл 
+3. Cоздаём в домашней директории конфигурационный файл 
 
 sudo nano  ~/.build.config
 
@@ -33,7 +33,7 @@ GPGKEY='ключ в РРА'
 
 DEBEMAIL='имя <e-mail>' указываем данные в РРА 
 
-например такие данные РРА: aap <andrey.a.pavlenko@gmail.com>
+например : aap <andrey.a.pavlenko@gmail.com>
 
 PPA_URL='ссылка на рра и ветка куда отправлять собранные source.changes'
 
@@ -41,7 +41,7 @@ PPA_URL='ссылка на рра и ветка куда отправлять с
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64'
 
-указываем платформы убунт для сборки (i386 по умолчанию)
+указываем платформы убунт для сборки (a для i386 по умолчанию)
 
 : ${MAINTAINER:="$DEBEMAIL"}
 
@@ -59,13 +59,15 @@ TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64'
 
 : ${DEB_MIRROR:='http://ru.archive.ubuntu.com/ubuntu'}
 
-устанавливаем утилиту dput,
+5. устанавливаем утилиту dput
 
-создаём dput.cf в домашней директории файл для отправки пакетов в РРА
+sudo apt-get install dput
+
+6. создаём dput.cf в домашней директории файл для отправки пакетов в РРА
 
 sudo nano  ~/dput.cf
 
-заполняем :
+7. заполняем 
 
 [frodo] 
 
@@ -73,37 +75,37 @@ fqdn = ppa.launchpad.net
 
 method = ftp 
 
-incoming = ~bigbax/frodo/ubuntu/ 
+incoming = ~bigbax/frodo/ubuntu/  --- укажите своё рра
 
 login = anonymous 
 
 allow_unsigned_uploads = 0
   
-9. Входим в директорию с .git
+8. Входим в директорию с .git
 
 cd $HOME/ppa/builders/xbmc-builder/xbmc
 
-10. Собираем:
+9. Собираем:
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
-11. Отправляем в РРА 6
+10. Отправляем в РРА 6
 
 PPA=рра_указанный_в_build.config ./build.sh upload
 
-12. ## Если имеется, то делаем предподготовку в своём github:
+11. ## Если имеется, то делаем предподготовку в своём github:
 
 git clone https://github.com/bigbelec/xbmc.git
 
-13. cd xbmc
+12. cd xbmc
 
-14. git init
+13. git init
 
-15. Переключаемся на нужную ветку гита :
+14. Переключаемся на нужную ветку гита :
 
 git checkout frodo
 
-16. На запрос :
+15. На запрос :
 
 *** Please tell me who you are.
 
@@ -113,17 +115,17 @@ git config --global user.email "логин в github"
 
 git config --global user.name "password" пароль пользователя в самой системе убунту
 
-17. делаем изменения(патчи) в локальном гите
+16. делаем изменения(патчи) в локальном гите
 
-18. индексируем:
+17. индексируем:
 
 git add .
 
-19. делаем коммит:
+18. делаем коммит:
 
 git commit -a -m 'pvr: fix channel switch for addons using other stream'
 
-20. отправляем измнения в гит в инете:
+19. отправляем измнения в гит в инете:
 
 git push -u https://github.com/bigbelec/xbmc.git
 
@@ -131,7 +133,7 @@ Username for 'https://github.com': bigbelec2014@yandex.ru
 
 Password for 'https://bigbelec2014@yandex.ru@github.com':  пароль в github
 
-21. Работа с своим github :
+20. Работа с своим github :
 
 cd ~/ppa/sources
 
