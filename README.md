@@ -5,29 +5,29 @@ Build scripts for XBMC and related packages.
 
 forked from AndreyPavlenko/xbmc-builder
 
- Создаем директории:
+#  Создаем директории
 
-1. mkdir $HOME/ppa
+mkdir $HOME/ppa
 
-2. mkdir $HOME/ppa/sources
+mkdir $HOME/ppa/sources
 
-3. cd $HOME/ppa/sources
+cd $HOME/ppa/sources
 
-4. git clone https://github.com/xbmc/xbmc.git
+git clone https://github.com/xbmc/xbmc.git
 
-5. exit
+exit
 
-  Клонируем билд скрипты:
+#  Клонируем билд скрипты
 
-6. mkdir -p $HOME/ppa/builders/xbmc-builder
+mkdir -p $HOME/ppa/builders/xbmc-builder
 
-7. git clone https://github.com/AndreyPavlenko/xbmc-builder.git $HOME/ppa/builders/xbmc-builder
+git clone https://github.com/AndreyPavlenko/xbmc-builder.git $HOME/ppa/builders/xbmc-builder
 
-8. Cоздаём в домашней директории конфигурационный файл :
+# Cоздаём в домашней директории конфигурационный файл 
 
 sudo nano  ~/.build.config
 
-В этом файле нужно прописать настройки :
+# В этом файле нужно прописать настройки 
 
 GPGKEY='ключ в РРА' 
 
