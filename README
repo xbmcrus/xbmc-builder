@@ -28,20 +28,12 @@ git clone https://github.com/AndreyPavlenko/xbmc-builder.git $HOME/ppa/builders/
 sudo nano  ~/.build.config
 
 # В этом файле нужно прописать настройки 
+# и указываем платформы убунт для сборки amd64 (a для i386 по умолчанию)
 
-GPGKEY='ключ в РРА' 
-
-DEBEMAIL='имя <e-mail>' указываем данные в РРА 
-
-например : aap <andrey.a.pavlenko@gmail.com>
-
-PPA_URL='ссылка на рра и ветка куда отправлять собранные source.changes'
-
-например 'https://launchpad.net/~aap/+archive/xbmc-fernetmenta'
-
+GPGKEY='8745EFD0'   'ключ в РРА как пример' 
+DEBEMAIL='aap <andrey.a.pavlenko@gmail.com>'  как пример
+PPA_URL='https://launchpad.net/~aap/+archive/xbmc-fernetmenta'  как пример
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64'
-
-указываем платформы убунт для сборки (a для i386 по умолчанию)
 
 : ${MAINTAINER:="$DEBEMAIL"}
 : ${BUILDPACKAGE_ARGS:="-k$GPGKEY"}
@@ -63,22 +55,17 @@ sudo nano  ~/dput.cf
 7. заполняем 
 
 [frodo] 
-
 fqdn = ppa.launchpad.net 
-
 method = ftp 
-
 incoming = ~bigbax/frodo/ubuntu/  --- укажите своё рра
-
 login = anonymous 
-
 allow_unsigned_uploads = 0
   
 8. Входим в директорию с .git
 
 cd $HOME/ppa/builders/xbmc-builder/xbmc
 
-9. Собираем:
+9. Собираем
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
@@ -86,7 +73,7 @@ TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.
 
 PPA=рра_указанный_в_build.config ./build.sh upload
 
-11. ## Если имеется, то делаем предподготовку в своём github:
+11. Если имеется, то делаем предподготовку в своём клоне(форке) github xbmc:
 
 git clone https://github.com/bigbelec/xbmc.git
 
@@ -94,15 +81,15 @@ git clone https://github.com/bigbelec/xbmc.git
 
 13. git init
 
-14. Переключаемся на нужную ветку гита :
+14. Переключаемся на нужную ветку гита 
 
 git checkout frodo
 
-15. На запрос :
+15. На запрос 
 
 *** Please tell me who you are.
 
-вводим поочерёдно :
+вводим поочерёдно 
 
 git config --global user.email "логин в github"
 
@@ -110,15 +97,15 @@ git config --global user.name "password" пароль пользователя �
 
 16. делаем изменения(патчи) в локальном гите
 
-17. индексируем:
+17. индексируем
 
 git add .
 
-18. делаем коммит:
+18. создаём коммит
 
 git commit -a -m 'pvr: fix channel switch for addons using other stream'
 
-19. отправляем измнения в гит в инете:
+19. отправляем измнения в гит в инете
 
 git push -u https://github.com/bigbelec/xbmc.git
 
@@ -126,7 +113,7 @@ Username for 'https://github.com': bigbelec2014@yandex.ru
 
 Password for 'https://bigbelec2014@yandex.ru@github.com':  пароль в github
 
-20. Работа с своим github для рра-бильдера:
+20. Работа с своим github для рра-бильдера
 
 cd ~/ppa/sources
 
@@ -136,7 +123,7 @@ cd xbmc
 
 git status
 
-если в ответ frodo, то всё сделано правильно,   и
+если в ответ frodo, то всё сделано правильно,   и выход
 
 exit
 
@@ -169,11 +156,11 @@ PPA=рра_указанный_в_build.config ./build.sh upload
 PPA=frodo ./build.sh upload
 
 
-24. Входим в каталог с сырцами: 
+24. Или если нужно , то отправляем в РРА вручную
+
+25. Входим в каталог с сырцами
 
 cd ~/ppa/builders/xbmc-builder/xbmc/distribs/26.10.13/src
-
-25. Или если нужно , то отправляем в РРА вручную :
 
 dput ppa:bigbax/frodo xbmc_12.2-20398~cf3a9a5-ppa1~precise_source.changes
 
