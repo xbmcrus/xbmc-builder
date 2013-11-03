@@ -8,19 +8,14 @@ forked from AndreyPavlenko/xbmc-builder
 1. Создаем директории
 
 mkdir $HOME/ppa
-
 mkdir $HOME/ppa/sources
-
 cd $HOME/ppa/sources
-
 git clone https://github.com/xbmc/xbmc.git
-
 exit
 
 2. Клонируем билд скрипты
 
 mkdir -p $HOME/ppa/builders/xbmc-builder
-
 git clone https://github.com/AndreyPavlenko/xbmc-builder.git $HOME/ppa/builders/xbmc-builder
 
 3. Cоздаём в домашней директории конфигурационный файл 
@@ -76,36 +71,33 @@ PPA=рра_указанный_в_build.config ./build.sh upload
 11. Если имеется, то делаем предподготовку в своём клоне(форке) github xbmc:
 
 git clone https://github.com/bigbelec/xbmc.git
+cd xbmc
+git init
 
-12. cd xbmc
-
-13. git init
-
-14. Переключаемся на нужную ветку гита 
+12. Переключаемся на нужную ветку гита 
 
 git checkout frodo
 
-15. На запрос 
+13. На запрос 
 
 *** Please tell me who you are.
 
 вводим поочерёдно 
 
 git config --global user.email "логин в github"
-
 git config --global user.name "password" пароль пользователя в самой системе убунту
 
-16. делаем изменения(патчи) в локальном гите
+14. делаем изменения(патчим) в локальном гите
 
-17. индексируем
+15. индексируем
 
 git add .
 
-18. создаём коммит
+16. создаём коммит
 
 git commit -a -m 'pvr: fix channel switch for addons using other stream'
 
-19. отправляем измнения в гит в инете
+17. отправляем измнения в гит в инете
 
 git push -u https://github.com/bigbelec/xbmc.git
 
@@ -113,41 +105,35 @@ Username for 'https://github.com': bigbelec2014@yandex.ru
 
 Password for 'https://bigbelec2014@yandex.ru@github.com':  пароль в github
 
-20. Работа с своим github для рра-бильдера
+18. Работа с своим github для рра-бильдера
 
 cd ~/ppa/sources
-
 git clone -b frodo https://github.com/bigbelec/xbmc.git
-
 cd xbmc
-
 git status
 
 если в ответ frodo, то всё сделано правильно,   и выход
 
 exit
 
-21. У себя в github ресурса также делаем по дефолту например ветвь frodo
+19. У себя в github ресурса также делаем по дефолту например ветвь frodo
 
-22. Меняем в конфигурации ветку для сборки:
+20. Меняем в конфигурации ветку для сборки:
 
 sudo nano ~/ppa/builders/xbmc-builder/xbmc/build.sh 
 
 : ${PKG_NAME:='xbmc'}
-
 : ${PKG_EPOCH:='2'}
-
 : ${SRC_URL:='https://github.com/bigbelec/xbmc.git'}
-
 : ${REV:='origin/frodo'}
 
-23. И наконец создаем source.changes для отправки в РРА :
+21. И наконец создаем source.changes для отправки в РРА :
 
 cd ~/ppa/builders/xbmc-builder/xbmc
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
-Отправляем source.changes  в своё рра
+22. Отправляем source.changes  в своё рра
 
 PPA=рра_указанный_в_build.config ./build.sh upload
 
@@ -156,44 +142,38 @@ PPA=рра_указанный_в_build.config ./build.sh upload
 PPA=frodo ./build.sh upload
 
 
-24. Или если нужно , то отправляем в РРА вручную
+23. Или если нужно , то отправляем в РРА вручную
 
-25. Входим в каталог с сырцами
+24. Входим в каталог с сырцами
 
 cd ~/ppa/builders/xbmc-builder/xbmc/distribs/26.10.13/src
 
 dput ppa:bigbax/frodo xbmc_12.2-20398~cf3a9a5-ppa1~precise_source.changes
 
-26. Создаем патч.
+25. Создаем патч.
 
 git diff > ~/ppa/builders/xbmc-builder/xbmc/debian/patches/strings.patch
 
-27. Прописываем этот патч в debian/patches/series
+26. Прописываем этот патч в debian/patches/series
 
 sudo nano ~/ppa/builders/xbmc-builder/xbmc/debian/patches/series
 
 впишем strings.patch
 
-28. Делаем и отправляем в РРА аддоны :
+27. Делаем и отправляем в РРА аддоны :
 
 cd ~/ppa/sources
-
 git clone https://github.com/pipelka/xbmc-addon-xvdr.git
-
 exit
 
-29. Собираем : 
+28. Собираем : 
 
 cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr
-
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
-
 PPA=frodo ./build.sh upload
-
 exit
 
+30 Или вручную отправляем в своё РРА 
+
 cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr/distribs/26.10.13/src
-
-30: отправляем в своё РРА :
-
 dput ppa:bigbax/frodo xbmc-addon-xvdr_0.9.8-361~acd4e14-ppa1~precise_source.changes
