@@ -44,19 +44,12 @@ TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64'
 указываем платформы убунт для сборки (a для i386 по умолчанию)
 
 : ${MAINTAINER:="$DEBEMAIL"}
-
 : ${BUILDPACKAGE_ARGS:="-k$GPGKEY"}
-
 : ${SOURCES_DIR:="$HOME/ppa/sources"}
-
 : ${PPA_BUILDER:="$HOME/ppa/ppa-builder"}
-
 : ${BASETGZ_DIR:='/var/cache/pbuilder/base'}
-
 : ${APT_CACHE_DIR:='/var/cache/pbuilder/aptcache'}
-
 : ${BUILD_DIR:="/tmp/build/$$"}
-
 : ${DEB_MIRROR:='http://ru.archive.ubuntu.com/ubuntu'}
 
 5. устанавливаем утилиту dput
