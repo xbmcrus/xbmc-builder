@@ -13,6 +13,9 @@ cd $HOME/ppa/sources
 git clone https://github.com/xbmc/xbmc.git
 exit
 
+при следуещем построении очистить $HOME/ppa/sources от xbmc
+rm -r xbmc
+
 2. Клонируем билд скрипты
 
 mkdir -p $HOME/ppa/builders/xbmc-builder
