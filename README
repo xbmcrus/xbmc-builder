@@ -89,7 +89,7 @@ cd $HOME/ppa/builders/xbmc-builder/xbmc
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
-10. Отправляем в РРА 6
+10. Отправляем в РРА 
 
 PPA=рра_указанный_в_build.config ./build.sh upload
 
@@ -133,7 +133,7 @@ Username for 'https://github.com': bigbelec2014@yandex.ru
 
 Password for 'https://bigbelec2014@yandex.ru@github.com':  пароль в github
 
-20. Работа с своим github :
+20. Работа с своим github для рра-бильдера:
 
 cd ~/ppa/sources
 
@@ -147,7 +147,7 @@ git status
 
 exit
 
-21. У себя в github также делаем по дефолту например ветвь frodo
+21. У себя в github ресурса также делаем по дефолту например ветвь frodo
 
 22. Меняем в конфигурации ветку для сборки:
 
@@ -167,12 +167,20 @@ cd ~/ppa/builders/xbmc-builder/xbmc
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 
+Отправляем source.changes  в своё рра
+
+PPA=рра_указанный_в_build.config ./build.sh upload
+
+например если это ppa:bigbax/frodo , то строка пишется так :
+
+PPA=frodo ./build.sh upload
+
 
 24. Входим в каталог с сырцами: 
 
 cd ~/ppa/builders/xbmc-builder/xbmc/distribs/26.10.13/src
 
-25. И если нужно , то отправляем в РРА вручную :
+25. Или если нужно , то отправляем в РРА вручную :
 
 dput ppa:bigbax/frodo xbmc_12.2-20398~cf3a9a5-ppa1~precise_source.changes
 
@@ -199,6 +207,8 @@ exit
 cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr
 
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
+
+PPA=frodo ./build.sh upload
 
 exit
 
