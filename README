@@ -144,36 +144,36 @@ PPA=frodo ./build.sh upload
 
 23. Или если нужно , то отправляем в РРА вручную
 
-24. Входим в каталог с сырцами
+# Входим в каталог с сырцами
 
 cd ~/ppa/builders/xbmc-builder/xbmc/distribs/26.10.13/src
 
 dput ppa:bigbax/frodo xbmc_12.2-20398~cf3a9a5-ppa1~precise_source.changes
 
-25. Создаем патч.
+24. Создаем патч.
 
 git diff > ~/ppa/builders/xbmc-builder/xbmc/debian/patches/strings.patch
 
-26. Прописываем этот патч в debian/patches/series
+25. Прописываем этот патч в debian/patches/series
 
 sudo nano ~/ppa/builders/xbmc-builder/xbmc/debian/patches/series
 
 впишем strings.patch
 
-27. Делаем и отправляем в РРА аддоны :
+26. Делаем и отправляем в РРА аддоны :
 
 cd ~/ppa/sources
 git clone https://github.com/pipelka/xbmc-addon-xvdr.git
 exit
 
-28. Собираем : 
+27. Собираем : 
 
 cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr
 TARGET_PLATFORMS='precise:amd64 quantal:amd64 raring:amd64 saucy:amd64' ./build.sh create
 PPA=frodo ./build.sh upload
 exit
 
-30 Или вручную отправляем в своё РРА 
+28 Или вручную отправляем в своё РРА 
 
 cd ~/ppa/builders/xbmc-builder/xbmc-addon-xvdr/distribs/26.10.13/src
 dput ppa:bigbax/frodo xbmc-addon-xvdr_0.9.8-361~acd4e14-ppa1~precise_source.changes
