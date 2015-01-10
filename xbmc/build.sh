@@ -3,7 +3,8 @@ set -e
 
 : ${PKG_NAME:='xbmc'}
 : ${PKG_EPOCH:='2'}
-: ${SRC_URL:='https://github.com/xbmc/xbmc.git'}
+: ${SRC_URL:='https://github.com/xbmcrus/xbmc.git'}
+: ${REV:='origin/Gotham'}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
