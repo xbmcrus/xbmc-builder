@@ -3,18 +3,19 @@ set -e
 
 : ${PKG_NAME:='xbmc-addon-xvdr'}
 : ${SRC_URL:='https://github.com/pipelka/xbmc-addon-xvdr.git'}
+: ${REV:=origin/xbmc-gotham}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/../commons.sh"
 
 version() {
-    local delta='15'
+    local delta='29'
     local bs_ci_count=$(git --git-dir="$DIR/../.git" log --format='%H' -- "$PKG_NAME" | wc -l)
     local sha=$(git --git-dir="$SRC_DIR/.git" log --format='%h' -n1 $REV)
     local ci_count=$(git --git-dir="$SRC_DIR/.git" log --format='%H' $REV | wc -l)
-    local v_major=$(git --git-dir="$SRC_DIR/.git" show $REV:configure.in | grep -E 'm4_define\(\[MAJOR\]' | awk '{print $2}' | tr -d ')')
-    local v_minor=$(git --git-dir="$SRC_DIR/.git" show $REV:configure.in | grep -E 'm4_define\(\[MINOR\]' | awk '{print $2}' | tr -d ')')
-    local v_micro=$(git --git-dir="$SRC_DIR/.git" show $REV:configure.in | grep -E 'm4_define\(\[MICRO\]' | awk '{print $2}' | tr -d ')')
+    local v_major=$(git --git-dir="$SRC_DIR/.git" show $REV:configure.ac | grep -E 'm4_define\(\[MAJOR\]' | awk '{print $2}' | tr -d ')')
+    local v_minor=$(git --git-dir="$SRC_DIR/.git" show $REV:configure.ac | grep -E 'm4_define\(\[MINOR\]' | awk '{print $2}' | tr -d ')')
+    local v_micro=$(git --git-dir="$SRC_DIR/.git" show $REV:configure.ac | grep -E 'm4_define\(\[MICRO\]' | awk '{print $2}' | tr -d ')')
     local version="${v_major}.${v_minor}.${v_micro}-$(($ci_count + $bs_ci_count + $delta))~${sha}"
     echo "$version"
 }
