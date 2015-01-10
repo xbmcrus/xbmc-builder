@@ -3,100 +3,97 @@ Section: video
 Priority: optional
 Maintainer: #MAINTAINER#
 Build-Depends: debhelper (>= 7.0.50~),
- python-support,
- cmake,
- autopoint,
- gettext,
- autotools-dev,
  autoconf,
  automake,
- unzip,
- libboost-dev,
- zip,
- libtool,
- libgles2-mesa-dev [armel] | libgl1-mesa-dev | libgl-dev,
- libglu1-mesa-dev | libglu-dev,
- libglew-dev,
- libgnutls26 | libgnutls28,
- libmad0-dev,
- libjpeg-dev,
- libsamplerate-dev,
- libogg-dev,
- libvorbis-dev,
- libmp3lame-dev,
- libfreetype6-dev,
- libfontconfig-dev,
- libbz2-dev,
- libfribidi-dev,
- libsqlite3-dev,
- libmysqlclient-dev,
+ autopoint,
+ autotools-dev,
+ ccache,
+ cmake,
+ curl,
+ cvs,
+ default-jre | openjdk-6-jre | openjdk-7-jre,
+ fpc,
+ gawk,
+ gdc,
+ gettext,
+ gperf,
+ libafpclient-dev,
  libasound2-dev | libasound-dev,
- libpng12-dev | libpng-dev,
- libpcre3-dev,
- liblzo2-dev,
+ libass-dev (>= 0.9.8),
+ libavahi-client-dev,
+ libavahi-common-dev,
+ libbluetooth-dev,
+ libbluray-dev,
+ libboost-dev,
+ libboost-thread-dev,
+ libbz2-dev,
  libcdio-dev,
+ libcec-dev (>= 1.1),
+ libcrystalhd-dev,
+ libcurl4-gnutls-dev | libcurl-dev,
+ libcwiid-dev,
+ libdbus-1-dev,
+ libenca-dev,
+ libflac-dev,
+ libfontconfig-dev,
+ libfreetype6-dev,
+ libfribidi-dev,
+ libgles2-mesa-dev [armel] | libgl1-mesa-dev | libgl-dev,
+ libglew-dev,
+ libglu1-mesa-dev | libglu-dev,
+ libgnutls-dev,
+ libiso9660-dev,
+ libjasper-dev,
+ libjpeg-dev,
+ libltdl-dev,
+ liblzo2-dev,
+ libmad0-dev,
+ libmicrohttpd-dev,
+ libmodplug-dev,
+ libmp3lame-dev,
+ libmpeg2-4-dev,
+ libmysqlclient-dev,
+ libnfs-dev,
+ libogg-dev,
+ libomxil-bellagio-dev [armel],
+ libpcre3-dev,
+ libplist-dev,
+ libpng12-dev | libpng-dev,
+ libpostproc-dev,
+ libpulse-dev,
+ librtmp-dev,
+ libsamplerate-dev,
  libsdl-dev,
  libsdl-image1.2-dev,
  libsdl-mixer1.2-dev,
- libenca-dev,
- libjasper-dev,
- libxt-dev,
- libxmu-dev,
- libcurl4-gnutls-dev | libcurl-dev,
- libdbus-1-dev,
- libpulse-dev,
- libavahi-common-dev,
- libavahi-client-dev,
- libxrandr-dev,
- libmpeg2-4-dev,
- libass-dev (>= 0.9.8),
- libflac-dev,
- python-dev,
- gawk,
- gperf,
- nasm [!amd64],
- yasm,
- libcwiid-dev,
- libbluetooth-dev,
- zlib1g-dev,
- libsmbclient-dev,
- libiso9660-dev,
- libssl-dev,
- lsb-release,
- libmicrohttpd-dev,
- libmodplug-dev,
- librtmp-dev,
- curl,
- libyajl-dev,
- libboost-thread-dev,
- gdc,
- fpc,
- cvs,
- libomxil-bellagio-dev [armel],
- python-imaging,
- libplist-dev,
- libcec-dev (>= 1.1),
- libudev-dev,
- libafpclient-dev,
  libshairport-dev,
- libnfs-dev,
- libbluray-dev,
- libtinyxml-dev,
- libvdpau-dev,
- libcrystalhd-dev,
+ libsmbclient-dev,
+ libsqlite3-dev,
  libssh-dev,
- libtag1-dev (>= 1.8),
- swig,
- default-jre,
+ libssl-dev,
+ libtag1x8 | libtag1-dev (>= 1.8),
  libtiff5-dev | libtiff-dev | libtiff4-dev,
+ libtinyxml-dev,
+ libtool,
+ libudev-dev,
  libva-dev,
- libltdl-dev,
- libavcodec-dev,
- libavfilter-dev,
- libavformat-dev,
- libavutil-dev,
- libpostproc-dev,
- libswscale-dev,
+ libvdpau-dev,
+ libvorbis-dev,
+ libxmu-dev,
+ libxrandr-dev,
+ libxslt1-dev | libxslt-dev,
+ libxt-dev,
+ libyajl-dev,
+ lsb-release,
+ nasm [!amd64],
+ python-dev,
+ python-imaging,
+ python-support,
+ swig,
+ unzip,
+ yasm,
+ zip,
+ zlib1g-dev
 Standards-Version: 3.9.3
 Homepage: http://xbmc.org/
 Vcs-Git: git://github.com/xbmc/xbmc-packaging.git
@@ -111,6 +108,7 @@ Depends: xbmc-bin (>= ${source:Version}),
          ttf-liberation | fonts-liberation,
          ttf-dejavu-core,
          python-imaging,
+         libxslt1.1,
          ${python:Depends},
          ${misc:Depends}
 Recommends: python-qt3
@@ -137,7 +135,7 @@ Description: XBMC Media Center (arch-independent data package)
  theater. Once installed, your computer will become a fully functional
  multimedia jukebox.
  .
- This package contains all the archiecture independent data needed to have a
+ This package contains all the architecture independent data needed to have a
  working XBMC.
 
 Package: xbmc-bin
@@ -319,3 +317,95 @@ Description: XBMC Media Center (Event Client XBMC-SEND package)
  multimedia jukebox.
  .
  This package is the XBMC-SEND package for XBMC Event Client.
+
+Package: xbmc-addon-dev
+Architecture: all
+Section: libdevel
+Description: XBMC Media Center (General Add-on Dev package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This is the Development package for XBMC add-ons.
+
+Package: xbmc-screensaver-dev
+Architecture: all
+Section: libdevel
+Description: XBMC Media Center (Screensaver Add-on Dev package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This is the Development package for XBMC screensaver add-ons.
+
+Package: xbmc-visualization-dev
+Architecture: all
+Section: libdevel
+Description: XBMC Media Center (Visualization Add-on Dev package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This is the Development package for XBMC visualization add-ons.
+
+Package: xbmc-pvr-dev
+Architecture: all
+Section: libdevel
+Description: XBMC Media Center (PVR Add-on Dev package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This is the Development package for XBMC PVR add-ons.

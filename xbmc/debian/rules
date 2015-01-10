@@ -43,6 +43,13 @@ GL_CONFIG_OPTIONS = --disable-gl --enable-gles
 OPENMAX_OPTIONS = --enable-openmax
 endif
 
+# Enable ccache if the ENABLE_CCACHE variable is true
+ifeq (true,$(ENABLE_CCACHE))
+CCACHE_OPTIONS = --enable-ccache
+else
+CCACHE_OPTIONS = --disable-ccache
+endif
+
 # Various environment variables to set
 ENV_OPTIONS = CFLAGS="$(DEB_CFLAGS)" CXXFLAGS="$(DEB_CXXFLAGS)"
 
@@ -60,27 +67,27 @@ XBMC_CONFIG_OPTIONS := \
   $(GL_CONFIG_OPTIONS) \
   $(OPENMAX_OPTIONS) \
   $(XBMC_CONFIG_EXTRA_OPTIONS) \
+  $(CCACHE_OPTIONS) \
   --disable-asap-codec \
-  --disable-ccache \
   --disable-mid \
+  --disable-openmax \
   --disable-profiling \
-  --disable-pulse \
   --disable-tegra \
   --disable-vdadecoder \
   --disable-vtbdecoder \
   --enable-afpclient \
   --enable-avahi \
-  --enable-crystalhd \
+  --disable-crystalhd \
   --enable-ffmpeg-libvorbis \
   --enable-hal \
   --enable-joystick \
   --enable-libbluray \
   --enable-nfs \
   --enable-optical-drive \
-  --enable-pvraddons-with-dependencies \
+  --enable-pulse \
   --enable-rtmp \
   --enable-texturepacker \
-  --enable-vaapi \
+  --disable-vaapi \
   --enable-vdpau \
   --enable-webserver \
   --enable-xrandr \
